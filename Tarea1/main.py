@@ -1,10 +1,9 @@
 import os
-import datetime
+import time
 import logging
 if os.path.exists("main.log"):
   os.remove("main.log")
 logging.basicConfig(filename='main.log', encoding='utf-8', level=logging.DEBUG)
-now = datetime.datetime.now()
 
 def checkCorrectIndex(index, lenght):
   if index.isnumeric():
@@ -37,23 +36,23 @@ def stackManagment(stack):
     if option == '1':
       answer = input('Escribe el texto a agregar: ')
       stack.append(answer)
-      logging.info(f'{now.strftime("%H:%M:%S")} Se agrego {answer} al stack.')
+      logging.info(f'{time.strftime("%H:%M:%S")} Se agrego {answer} al stack.')
       option = ''
 
     elif option == '2':
       if len(stack) > 0:
         removed = stack.pop()
-        logging.info(f'{now.strftime("%H:%M:%S")} Se elimino {removed} del stack.')
+        logging.info(f'{time.strftime("%H:%M:%S")} Se elimino {removed} del stack.')
 
       else:
         print('El stack esta vacio')
-        logging.warning(f'{now.strftime("%H:%M:%S")} Se ha intentado sacar un elemento del stack, pero este esta vacio.')
+        logging.warning(f'{time.strftime("%H:%M:%S")} Se ha intentado sacar un elemento del stack, pero este esta vacio.')
 
       option = ''
 
     elif option == '3':
       print(stack)
-      logging.info(f'{now.strftime("%H:%M:%S")} Se ha visualizado el stack: {stack}')
+      logging.info(f'{time.strftime("%H:%M:%S")} Se ha visualizado el stack: {stack}')
       option = ''
   return
 
@@ -74,18 +73,18 @@ def menu(option):
 
 stack = []
 option = ''
-logging.info(f'{now.strftime("%H:%M:%S")} Se ha iniciado el programa')
+logging.info(f'{time.strftime("%H:%M:%S")} Se ha iniciado el programa')
 while option != '6':
   option = menu(option)
 
   if option == '1':
-    logging.info(f'{now.strftime("%H:%M:%S")} Se ha entrado a la seccion de manejo de stack')
+    logging.info(f'{time.strftime("%H:%M:%S")} Se ha entrado a la seccion de manejo de stack')
     stackManagment(stack)
-    logging.info(f'{now.strftime("%H:%M:%S")} Se ha salido de la seccion de manejo de stack')
+    logging.info(f'{time.strftime("%H:%M:%S")} Se ha salido de la seccion de manejo de stack')
     option = ''
     
   elif option == '2':
-    logging.info(f'{now.strftime("%H:%M:%S")} Se ha entrado a la seccion de ver texto mas largo')
+    logging.info(f'{time.strftime("%H:%M:%S")} Se ha entrado a la seccion de ver texto mas largo')
     if (len(stack) > 0):
       max = 0
       maxWord = ''
@@ -94,14 +93,14 @@ while option != '6':
           maxWord = element
           max = len(element)
       print('\n'+maxWord+'\n')
-      logging.info(f'{now.strftime("%H:%M:%S")} Se ha impreso el texto mas largo: {maxWord}')
+      logging.info(f'{time.strftime("%H:%M:%S")} Se ha impreso el texto mas largo: {maxWord}')
     else:
       print('No hay elementos suficientes en la pila')
-      logging.warning(f'{now.strftime("%H:%M:%S")} Se ha intentado visualizar el texto mas largo, pero el stack esta vacio.')
+      logging.warning(f'{time.strftime("%H:%M:%S")} Se ha intentado visualizar el texto mas largo, pero el stack esta vacio.')
     option = ''
 
   elif option == '3':
-    logging.info(f'{now.strftime("%H:%M:%S")} Se ha entrado a la seccion de ver texto mas corto.')
+    logging.info(f'{time.strftime("%H:%M:%S")} Se ha entrado a la seccion de ver texto mas corto.')
     if (len(stack) > 0):
       min = float('inf')
       minWord = ''
@@ -110,14 +109,14 @@ while option != '6':
           minWord = element
           min = len(element)
       print('\n'+minWord+'\n')
-      logging.info(f'{now.strftime("%H:%M:%S")} Se ha impreso el texto mas corto: {minWord}')
+      logging.info(f'{time.strftime("%H:%M:%S")} Se ha impreso el texto mas corto: {minWord}')
     else:
       print('No hay elementos suficientes en la pila')
-      logging.warning(f'{now.strftime("%H:%M:%S")} Se ha intentado visualizar el texto mas corto, pero el stack esta vacio.')
+      logging.warning(f'{time.strftime("%H:%M:%S")} Se ha intentado visualizar el texto mas corto, pero el stack esta vacio.')
     option = ''
 
   elif option == '4':
-    logging.info(f'{now.strftime("%H:%M:%S")} Se ha entrado a la seccion de ver un texto')
+    logging.info(f'{time.strftime("%H:%M:%S")} Se ha entrado a la seccion de ver un texto')
     if (len(stack) > 0):
       selectedText = input('Selecciona el indice de la palabra a imprimir (0, 1, 2, ...): ')
       valid = checkCorrectIndex(selectedText, int(len(stack)))
@@ -127,14 +126,14 @@ while option != '6':
         valid = checkCorrectIndex(selectedText, int(len(stack)))
       selectedText = int(selectedText)
       print('\n'+stack[selectedText])
-      logging.info(f'{now.strftime("%H:%M:%S")} Se ha impreso el texto de la posicion {str(selectedText)}: {stack[selectedText]}')
+      logging.info(f'{time.strftime("%H:%M:%S")} Se ha impreso el texto de la posicion {str(selectedText)}: {stack[selectedText]}')
     else:
       print('No hay elementos suficientes en la pila')
-      logging.warning(f'{now.strftime("%H:%M:%S")} Se ha intentado visualizar el un texto, pero el stack esta vacio.')
+      logging.warning(f'{time.strftime("%H:%M:%S")} Se ha intentado visualizar el un texto, pero el stack esta vacio.')
     option = ''
 
   elif option == '5':
-    logging.info(f'{now.strftime("%H:%M:%S")} Se ha entrado a la seccion de comparar 2 textos')
+    logging.info(f'{time.strftime("%H:%M:%S")} Se ha entrado a la seccion de comparar 2 textos')
     if len(stack) >= 2:
       firstText = input('Selecciona el indice de la primera palabra (0, 1, 2, ...): ')
       valid = checkCorrectIndex(firstText, int(len(stack)))
@@ -145,7 +144,7 @@ while option != '6':
       
       secondText = input('Selecciona el indice de la segunda palabra (0, 1, 2, ...): ')
       valid = checkCorrectIndex(secondText, int(len(stack)))
-      while (not valid or firstText==secondText ):
+      while (not valid):
         print('selecciona una opcion valida')
         secondText = input('Selecciona el indice de la palabra a imprimir (0, 1, 2, ...): ')
         valid = checkCorrectIndex(secondText, int(len(stack)))
@@ -153,19 +152,19 @@ while option != '6':
       secondText = int(secondText)
       if ( len(stack[firstText]) > len(stack[secondText]) ):
         print('\n'+stack[firstText]+' -> '+ str(len(stack[firstText])) + ' > '+stack[secondText]+' -> '+ str(len(stack[secondText])) +'\n')
-        logging.info(f'{now.strftime("%H:%M:%S")} {stack[firstText]} es mas larga que {stack[secondText]} con {str(len(stack[firstText]))} vs {str(len(stack[secondText]))} caracteres')
+        logging.info(f'{time.strftime("%H:%M:%S")} {stack[firstText]} es mas larga que {stack[secondText]} con {str(len(stack[firstText]))} vs {str(len(stack[secondText]))} caracteres')
 
       elif ( len(stack[firstText]) < len(stack[secondText]) ):
         print('\n'+stack[firstText]+' -> '+ str(len(stack[firstText])) + ' < '+stack[secondText]+' -> '+ str(len(stack[secondText])) +'\n')
-        logging.info(f'{now.strftime("%H:%M:%S")} {stack[firstText]} es mas corta que {stack[secondText]} con {str(len(stack[firstText]))} vs {str(len(stack[secondText]))} caracteres')
+        logging.info(f'{time.strftime("%H:%M:%S")} {stack[firstText]} es mas corta que {stack[secondText]} con {str(len(stack[firstText]))} vs {str(len(stack[secondText]))} caracteres')
       else:
         print('\n'+stack[firstText]+' -> '+ str(len(stack[firstText])) + ' = '+stack[secondText]+' -> '+ str(len(stack[secondText])) +'\n')
-        logging.info(f'{now.strftime("%H:%M:%S")} {stack[firstText]} tiene el mismo largo que {stack[secondText]} con {str(len(stack[firstText]))} caracteres')
+        logging.info(f'{time.strftime("%H:%M:%S")} {stack[firstText]} tiene el mismo largo que {stack[secondText]} con {str(len(stack[firstText]))} caracteres')
     else:
       print('No hay suficientes elementos para poder comparar')
-      logging.warning(f'{now.strftime("%H:%M:%S")} Se ha intentado comparar el largo de 2 textos, pero no hay suficientes elementos en el stack: {stack}.')
+      logging.warning(f'{time.strftime("%H:%M:%S")} Se ha intentado comparar el largo de 2 textos, pero no hay suficientes elementos en el stack: {stack}.')
     option = ''
 
 print('Saliendo...')
-logging.info(f'{now.strftime("%H:%M:%S")} Se ha salido del programa')
+logging.info(f'{time.strftime("%H:%M:%S")} Se ha salido del programa')
 
